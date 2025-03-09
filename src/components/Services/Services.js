@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import './Services.css';
 import { motion } from 'framer-motion';
 import { FaImage } from 'react-icons/fa';
-
+import styled from 'styled-components';
 const ServicesSection = styled.section`
   padding: 100px 50px;
   background: ${props => props.theme.colors.lightGray2};
@@ -105,7 +105,7 @@ const services = [
     image: '/images/music-video-production.jpg'
   },
   {
-    title: 'VedioGraphy Photography',
+    title: 'VideoGraphy Photography',
     description: 'Capturing high-quality videos and photos to enhance brand presence and digital engagement.',
     image: '/images/vediography-photography.jpg'
   },
