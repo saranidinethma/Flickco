@@ -100,9 +100,9 @@ const services = [
     image: '/images/ui-ux-design.jpg'
   },
   {
-    title: 'Music Vedio Production ',
+    title: 'Music Video Production ',
     description: 'Creating visually stunning music videos with professional direction, filming, and editing.',
-    image: '/images/music-video-production.jpg'
+    image: '/images/music-Video-production.jpg'
   },
   {
     title: 'VideoGraphy Photography',
