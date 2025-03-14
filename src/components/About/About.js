@@ -199,7 +199,7 @@ const About = () => {
     {
       name: 'Nimesh De Silva',
       role: 'Arial Photography and Vediography',
-      image: '/team/ravishan.jpg'
+      image: ''
     }
 
   ];
