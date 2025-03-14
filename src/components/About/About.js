@@ -193,7 +193,7 @@ const About = () => {
     {
       name: 'Shavinda Fernando',
       role: 'Social media marketing (paid advertising specialist/ social media strategist)',
-      image: '/team/shavinda.jpg'
+      image: '/team/Shavinda.jpg'
     },
     
     {
