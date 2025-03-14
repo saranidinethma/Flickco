@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import './Portfolio.css';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
+import styled from 'styled-components';
 const PortfolioSection = styled.section`
   padding: 100px 0;
   background: ${props => props.theme.colors.lightGray2};

@@ -167,7 +167,7 @@ const About = () => {
   const teamMembers = [
     {
       name: 'Supun Lowe',
-      role: 'Influencer Markerting Manager',
+      role: 'Marketing Manager',
       image: '/team/supun.jpg'
     },
     {
@@ -195,11 +195,7 @@ const About = () => {
       role: 'Social media marketing (paid advertising specialist/ social media strategist)',
       image: '/team/shavinda.jpg'
     },
-    {
-      name: 'Ravishan Kaveesha',
-      role: 'Markerting Manager',
-      image: '/team/ravishan.jpg'
-    },
+    
     {
       name: 'Nimesh De Silva',
       role: 'Arial Photography and Vediography',
