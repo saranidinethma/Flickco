@@ -166,21 +166,6 @@ const VisionText = styled.p`
 const About = () => {
   const teamMembers = [
     {
-      name: 'Supun Lowe',
-      role: 'Marketing Manager',
-      image: '/team/supun.jpg'
-    },
-    {
-      name: 'Sarani Liyanage',
-      role: 'UI/UX Designer',
-      image: '/team/sarani.jpg'
-    },
-    {
-      name: 'Mario Lowe',
-      role: 'Graphics designer (creative designer/ multimedia designer) , ',
-      image: '/team/Mario.jpg'
-    },
-    {
       name: 'Dihan Jayasooriya',
       role: 'Creative director ( visual director / art director)',
       image: '/team/Dihan.jpg'
@@ -191,11 +176,27 @@ const About = () => {
       image: '/team/Adeesha.jpg'
     },
     {
+      name: 'Mario Lowe',
+      role: 'Graphics designer (creative designer/ multimedia designer) , ',
+      image: '/team/Mario.jpg'
+    },
+    {
+      name: 'Supun Lowe',
+      role: 'Marketing Manager',
+      image: '/team/supun.jpg'
+    },
+
+    {
       name: 'Shavinda Fernando',
-      role: 'Social media marketing (paid advertising specialist/ social media strategist)',
+      role: 'Social media marketing ',
       image: '/team/Shavinda.jpg'
     },
-    
+    {
+      name: 'Sarani Liyanage',
+      role: 'UI/UX Designer',
+      image: '/team/sarani.jpg'
+    },
+
     {
       name: 'Nimesh De Silva',
       role: 'Arial Photography and Vediography',
