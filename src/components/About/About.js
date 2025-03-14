@@ -210,7 +210,7 @@ const About = () => {
         <Container>
           <PageTitle>About Us</PageTitle>
           <AboutContent>
-            <AboutImage src="/about/4669613.jpg" alt="About Flickco" />
+            <AboutImage src="/about/about-company.jpg" alt="About Flickco" />
             <AboutText>
               <h2>Your Partner in Digital Strategy</h2>
               <p>
