@@ -183,7 +183,7 @@ const About = () => {
     {
       name: 'Dihan Jayasooriya',
       role: 'Creative director ( visual director / art director)',
-      image: '/team/dihan.jpg'
+      image: '/team/Dihan.jpg'
     },
     {
       name: 'Adeesha Fernando',
