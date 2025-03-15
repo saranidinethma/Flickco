@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
@@ -34,22 +35,27 @@ const HomePage = () => (
     <Hero />
     <Services />
     <Portfolio />
-    <About />
     <Contact />
   </>
 );
 
 function App() {
+  const [showExperts, setShowExperts] = useState(false);
+
+  const handleAboutClick = () => {
+    setShowExperts(true); // Toggle "Meet Our Experts" visibility on About page
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Router>
-        <Navbar />
+        <Navbar onAboutClick={handleAboutClick} /> {/* Pass handleAboutClick to Navbar */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<About showExperts={showExperts} />} />
           <Route path="/contact" element={<Contact />} />
 
           {/* Social Media Routes */}

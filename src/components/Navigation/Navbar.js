@@ -1,48 +1,25 @@
-// Navbar.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import './Navbar.css';
 import logoImage from '../../assets/flickco-logo.jpg';
 
-const Navbar = () => {
+
+
+const Navbar = ({ onAboutClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 50);
+  };
 
   // Close mobile menu when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (mobileMenuOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.mobile-menu-button')) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [mobileMenuOpen]);
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [mobileMenuOpen]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
@@ -66,7 +43,13 @@ const Navbar = () => {
         <Link to="/" className="nav-link">Home</Link>
         <Link to="/portfolio" className="nav-link">Portfolio</Link>
         <Link to="/services" className="nav-link">Services</Link>
-        <Link to="/about" className="nav-link">About Us</Link>
+        <Link 
+          to="/about" 
+          className="nav-link" 
+          onClick={onAboutClick}
+        >
+          About Us
+        </Link>
         <Link to="/contact" className="nav-link">Contact</Link>
       </div>
 
