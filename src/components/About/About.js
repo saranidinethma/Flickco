@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import StructuredWorkflow from './StructuredWorkflow';
 
 const AboutSection = styled.section`
   padding: 80px 0;
@@ -86,6 +87,9 @@ const About = () => {
             <AboutDescription>Let’s create something unforgettable together.</AboutDescription>
           </AboutText>
         </AboutContent>
+
+        {/* Structured Workflow Section */}
+        <StructuredWorkflow />
       </Container>
     </AboutSection>
   );
