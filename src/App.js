@@ -21,8 +21,7 @@ const HomePage = () => (
   <>
     <Hero />
     <Services />
-    <Portfolio />
-    <About />  {/* Display About.js after Portfolio */}
+    <About />  {/* Display About.js after Services */}
     <Contact />
   </>
 );
@@ -36,7 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio" element={<Portfolio />} />  {/* Portfolio only shown here */}
           {/* Experts page only when /about is clicked */}
           <Route path="/about" element={<Experts />} />
           <Route path="/contact" element={<Contact />} />
