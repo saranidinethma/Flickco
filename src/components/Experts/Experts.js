@@ -352,7 +352,7 @@ const Experts = () => {
                 <LeaderImage src="/Experts/Dihan.jpg" alt="CEO" />
                 <LeaderInfo>
                   <LeaderTitle>Dihan Jayasooriya</LeaderTitle>
-                  <LeaderRole>Chief Executive Officer (CEO)</LeaderRole>
+                  <LeaderRole>Founder & Strategy Manager</LeaderRole>
                 </LeaderInfo>
               </LeaderCard>
 
@@ -360,7 +360,7 @@ const Experts = () => {
                 <LeaderImage src="/Experts/Adeesha.jpg" alt="CTO" />
                 <LeaderInfo>
                   <LeaderTitle>Adeesha Perera</LeaderTitle>
-                  <LeaderRole>Chief Technology Officer (CTO)</LeaderRole>
+                  <LeaderRole>Co Founder & CEO</LeaderRole>
                 </LeaderInfo>
               </LeaderCard>
             </LeadershipSection>
