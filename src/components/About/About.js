@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import StructuredWorkflow from './StructuredWorkflow';
 
 const Section = styled.section`
   padding: 100px 0;
@@ -133,6 +134,7 @@ const AboutSection = () => {
             </AboutDescription>
           </AboutText>
         </AboutContent>
+        <StructuredWorkflow/>
       </Container>
     </Section>
   );
