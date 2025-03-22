@@ -130,10 +130,13 @@ const AboutSection = () => {
               From concept to final edit, we focus on capturing raw emotions, immersive storytelling, and striking aesthetics. Whether it's an intimate acoustic performance on the beach or a high-energy night shoot, Flickco delivers with precision and passion.
             </AboutDescription>
             <AboutDescription>
-              Let's create something unforgettable together.
+              Let's create something unforgettable together.<br></br>
             </AboutDescription>
           </AboutText>
-        </AboutContent>
+        </AboutContent><br></br>
+        <br></br>
+        <br></br>
+        <br></br>
         <StructuredWorkflow/>
       </Container>
     </Section>
