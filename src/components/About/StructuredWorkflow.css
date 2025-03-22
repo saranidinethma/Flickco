@@ -1,6 +1,6 @@
 .workflow-container {
   padding: clamp(60px, 10vh, 100px) 0;
-  background-color: #ececec;
+  background-color: #383737;
   color: #fff;
   text-align: center;
 }
@@ -12,7 +12,7 @@
 }
 
 .highlight {
-  color: #56504b;
+  color: #e65c00;
 }
 
 .workflow-cards {

@@ -1,42 +1,72 @@
 import React from 'react';
 import styled from 'styled-components';
-import StructuredWorkflow from './StructuredWorkflow';
 
-const AboutSection = styled.section`
-  padding: 80px 0;
-  background: #f8f9fa;
+const Section = styled.section`
+  padding: 100px 0;
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  overflow: hidden;
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 30px;
+  
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
 const AboutContent = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
   align-items: center;
-  text-align: center;
-  gap: 40px;
-  margin-bottom: 80px;
+  
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+`;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
+const AboutImageWrapper = styled.div`
+  position: relative;
+  order: 1;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #ff3c00;
+    border-radius: 15px;
+    z-index: 0;
+  }
+  
+  @media (max-width: 992px) {
+    order: 0;
+    max-width: 500px;
+    margin: 0 auto;
   }
 `;
 
 const AboutImage = styled.img`
   width: 100%;
-  max-width: 500px;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
 `;
 
 const AboutText = styled.div`
-  max-width: 600px;
+  order: 0;
+  
+  @media (max-width: 992px) {
+    order: 1;
+    text-align: center;
+  }
 `;
 
 const AboutTitle = styled.h1`
@@ -45,54 +75,67 @@ const AboutTitle = styled.h1`
   text-transform: uppercase;
   font-weight: bold;
   margin-bottom: 10px;
+  
+  @media (max-width: 992px) {
+    margin: 0 auto 15px;
+  }
 `;
 
 const MainHeading = styled.h2`
   font-size: 3.5rem;
   color: #06114f;
-  font-weight: bold;
-  line-height: 1.3;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    br {
+      display: none;
+    }
+  }
 `;
 
 const AboutDescription = styled.p`
   font-size: 16px;
   line-height: 1.8;
   color: #666;
-  margin-top: 20px;
+  margin-bottom: 20px;
+  
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
-const About = () => {
+const AboutSection = () => {
   return (
-    <AboutSection>
+    <Section>
       <Container>
         <AboutContent>
-          <AboutImage src="/about/about-Flickco.jpg" alt="About Flickco" />
+          <AboutImageWrapper>
+            <AboutImage src="/about/about-Flickco.jpg" alt="About Flickco" />
+          </AboutImageWrapper>
           <AboutText>
             <AboutTitle>About Us</AboutTitle>
             <MainHeading>
               Your Partner <br />
-              in digital <br />
+              in Digital <br />
               Strategy
             </MainHeading>
             <AboutDescription>
-              At Flickco, we bring stories to life through cinematic visuals and compelling narratives.
-              Specializing in high-quality video production, we craft stunning music videos, commercials, 
-              and creative projects that leave a lasting impact.
+              At Flickco, we bring stories to life through cinematic visuals and compelling narratives. Specializing in high-quality video production, we craft stunning music videos, commercials, and creative projects that leave a lasting impact.
             </AboutDescription>
             <AboutDescription>
-              From concept to final edit, we focus on capturing raw emotions, immersive storytelling, 
-              and striking aesthetics. Whether it’s an intimate acoustic performance on the beach 
-              or a high-energy night shoot, Flickco delivers with precision and passion.
+              From concept to final edit, we focus on capturing raw emotions, immersive storytelling, and striking aesthetics. Whether it's an intimate acoustic performance on the beach or a high-energy night shoot, Flickco delivers with precision and passion.
             </AboutDescription>
-            <AboutDescription>Let’s create something unforgettable together.</AboutDescription>
+            <AboutDescription>
+              Let's create something unforgettable together.
+            </AboutDescription>
           </AboutText>
         </AboutContent>
-
-        {/* Structured Workflow Section */}
-        <StructuredWorkflow />
       </Container>
-    </AboutSection>
+    </Section>
   );
 };
 
-export default About;
+export default AboutSection;
