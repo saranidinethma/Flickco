@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FaProjectDiagram, FaClock, FaGlobe } from 'react-icons/fa';
 import styled from 'styled-components';
+import TrustedBy from './TrustedBy'; // Adjust the import path if needed
+
 
 // Styled Components
 const WorkflowSection = styled.section`
@@ -261,6 +263,11 @@ const StructuredWorkflow = () => {
             </CardDescription>
           </Card>
         </CardsContainer>
+        <br>
+        </br>
+        <br></br>
+        <br></br><br></br>
+        <TrustedBy/>
       </Container>
     </WorkflowSection>
   );

@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const Section = styled.section`
   padding: 100px 0;
-  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  background: linear-gradient(to bottom,rgb(223, 223, 223), #ffffff);
   overflow: hidden;
 `;
 
@@ -258,30 +258,20 @@ const ExpertImageWrapper = styled.div`
   position: relative;
   margin-bottom: 20px;
   
-  &:before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff3c00, #ff7e00);
-    opacity: 0.2;
-    z-index: 0;
-  }
+  
 `;
 
 const ExpertImage = styled.img`
   width: 150px;
   height: 150px;
-  border-radius: 50%;
   object-fit: cover;
   border: 5px solid #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
+  border-radius: 0; /* Adjust the radius or set to 0 for sharp edges */
 `;
+
 
 const ExpertName = styled.h4`
   font-size: 1.4rem;
@@ -305,7 +295,7 @@ const Experts = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 750,
     pauseOnHover: true,
     responsive: [
       {
@@ -324,13 +314,13 @@ const Experts = () => {
   };
 
   const experts = [
-    { name: 'Expert 1', role: 'Role 1', img: '/Experts/expert1.jpg' },
-    { name: 'Expert 2', role: 'Role 2', img: '/Experts/expert2.jpg' },
-    { name: 'Expert 3', role: 'Role 3', img: '/Experts/expert3.jpg' },
-    { name: 'Expert 4', role: 'Role 4', img: '/Experts/expert4.jpg' },
-    { name: 'Expert 5', role: 'Role 5', img: '/Experts/expert5.jpg' },
-    { name: 'Expert 6', role: 'Role 6', img: '/Experts/expert6.jpg' },
-    { name: 'Expert 7', role: 'Role 7', img: '/Experts/expert7.jpg' },
+    { name: 'Dihan Jayasooriya', role: 'Director Of Photography', img: '/Experts/Dihan.jpg' },
+    { name: 'Adeesha Fernando', role: 'Art Director', img: '/Experts/Adeesha.jpg' },
+    { name: 'Mario Lowe', role: 'Graphics Designer', img: '/Experts/Mario.jpg' },
+    { name: 'Sarani Dinethma', role: 'UI/UX Designer', img: '/Experts/sarani.jpg' },
+    { name: 'Shavinda Fernando', role: 'Social Media Manager', img: '/Experts/Shavinda.jpg' },
+    { name: 'Supun Lowe', role: 'Marketing management', img: '/Experts/supun.jpg' },
+   
   ];
 
   return (

@@ -1,0 +1,58 @@
+.trusted-by-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #f7f7f7;
+  }
+  
+  .trusted-by-title {
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .highlight {
+    color: #ff6347; /* Tomato color */
+  }
+  
+  .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logos {
+    display: flex;
+    gap: 30px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    width: 80vw;
+  }
+  
+  .customer-logo {
+    height: 80px;
+    width: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .customer-logo:hover {
+    transform: scale(1.1);
+  }
+  
+  .arrow {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 10px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .arrow:hover {
+    transform: scale(1.1);
+    background-color: #eee;
+  }
+  
