@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Portfolio.css';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 const PortfolioSection = styled.section`
   padding: 100px 0;
-  background: ${props => props.theme.colors.lightGray2};
+  background: #f5f5f5;
 `;
 
 const Container = styled.div`
@@ -18,7 +19,7 @@ const Title = styled.h2`
   text-align: center;
   font-size: 2.5rem;
   margin-bottom: 50px;
-  color: ${props => props.theme.colors.dark};
+  color: #333;
 `;
 
 const Grid = styled.div`
@@ -34,7 +35,7 @@ const ProjectCard = styled(motion(Link))`
   overflow: hidden;
   aspect-ratio: 4/3;
   text-decoration: none;
-  box-shadow: ${props => props.theme.shadows.medium};
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 
   img {
     width: 100%;
@@ -48,96 +49,85 @@ const ProjectCard = styled(motion(Link))`
   }
 `;
 
-const ProjectOverlay = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 30px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: white;
+const Gallery = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+`;
 
-  h3 {
-    margin: 0 0 10px;
-    font-size: 1.5rem;
-    font-weight: 600;
+const categories = [
+  {
+    id: 'website',
+    title: 'Website',
+    image: '/images/portfolio/website-cover.jpg',
+    description: 'Creative website projects',
+    subcategories: []
+  },
+  {
+    id: 'social-media',
+    title: 'Social Media',
+    image: '/images/portfolio/social-media/posts/starbeens.jpg',
+    description: 'Social media content',
+    subcategories: ['Social Media Posts', 'Social Media Reels']
+  },
+  {
+    id: 'animations',
+    title: 'Animations',
+    image: '/images/portfolio/animations-cover.jpg',
+    description: '2D and 3D animations',
+    subcategories: ['2D Animations', '3D Animations']
+  },
+  {
+    id: 'photography',
+    title: 'Photography',
+    image: '/images/portfolio/photography-cover.jpg',
+    description: 'Photo and video productions',
+    subcategories: ['Photography', 'Videography']
   }
-
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    opacity: 0.9;
-  }
-`;
-
-const SubcategoryList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
-`;
-
-const SubcategoryTag = styled.span`
-  background: rgba(255, 255, 255, 0.2);
-  padding: 5px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-`;
+];
 
 const Portfolio = () => {
-  const categories = [
-    {
-      id: 'social-media',
-      title: 'Social Media',
-      image: '/images/portfolio/social-media/posts/starbeens.jpg',
-      description: 'Creative content for social platforms',
-      path: '/portfolio/social-media',
-      subcategories: ['Social Media Posts', 'Social Media Reels']
-    },
-    {
-      id: 'animations',
-      title: 'Animations',
-      image: '/images/portfolio/animations-cover.jpg',
-      description: 'Engaging 2D and 3D animations',
-      path: '/portfolio/animations',
-      subcategories: ['Animations', '3D Animations']
-    },
-    {
-      id: 'photo-video',
-      title: 'Photography & Video',
-      image: '/images/portfolio/photo-video-cover.jpg',
-      description: 'Professional photo and video production',
-      path: '/portfolio/photo-video',
-      subcategories: ['Photography', 'Videography']
-    }
-  ];
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const handleCategoryClick = (category) => {
+    setActiveCategory(category);
+  };
 
   return (
     <PortfolioSection id="portfolio">
       <Container>
         <Title>Our Portfolio</Title>
         <Grid>
-          {categories.map((category, index) => (
+          {categories.map((category) => (
             <ProjectCard
               key={category.id}
-              to={category.path}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              onClick={() => handleCategoryClick(category)}
             >
               <img src={category.image} alt={category.title} />
-              <ProjectOverlay>
+              <div className="portfolio-overlay">
                 <h3>{category.title}</h3>
                 <p>{category.description}</p>
-                <SubcategoryList>
-                  {category.subcategories.map((sub, i) => (
-                    <SubcategoryTag key={i}>{sub}</SubcategoryTag>
-                  ))}
-                </SubcategoryList>
-              </ProjectOverlay>
+              </div>
             </ProjectCard>
           ))}
         </Grid>
+        {activeCategory && (
+          <Gallery>
+            {activeCategory.subcategories.map((sub, index) => (
+              <div key={index} className="portfolio-item">
+                <img
+                  src={`/images/portfolio/${activeCategory.id}/${sub.toLowerCase().replace(/ /g, '-')}.jpg`}
+                  alt={sub}
+                  className="portfolio-image"
+                />
+                <div className="portfolio-overlay">
+                  <h4>{sub}</h4>
+                </div>
+              </div>
+            ))}
+          </Gallery>
+        )}
       </Container>
     </PortfolioSection>
   );

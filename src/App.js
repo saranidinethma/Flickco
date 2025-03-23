@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './styles/GlobalStyles';
 import theme from './styles/theme';
-
+import SubcategoryPage from './components/Portfolio/SubcategoryPage';
 // Core Components
 import Navbar from './components/Navigation/Navbar';
 import Hero from './components/Hero/Hero';
@@ -35,7 +35,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<Portfolio />} />  {/* Portfolio only shown here */}
+          <Route path="/portfolio" element={<Portfolio />} />  
+          <Route path="/portfolio/:categoryId" component={SubcategoryPage} />{/* Portfolio only shown here */}
           {/* Experts page only when /about is clicked */}
           <Route path="/about" element={<Experts />} />
           <Route path="/contact" element={<Contact />} />

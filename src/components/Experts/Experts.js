@@ -295,7 +295,7 @@ const Experts = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 750,
+    autoplaySpeed: 2000,
     pauseOnHover: true,
     responsive: [
       {
