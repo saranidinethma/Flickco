@@ -317,6 +317,7 @@ const Experts = () => {
     { name: 'Dihan Jayasooriya', role: 'Director Of Photography', img: '/Experts/Dihan.jpg' },
     { name: 'Adeesha Fernando', role: 'Art Director', img: '/Experts/Adeesha.jpg' },
     { name: 'Mario Lowe', role: 'Graphics Designer', img: '/Experts/Mario.jpg' },
+
     { name: 'Sarani Dinethma', role: 'UI/UX Designer', img: '/Experts/sarani.jpg' },
     { name: 'Shavinda Fernando', role: 'Social Media Manager', img: '/Experts/Shavinda.jpg' },
     { name: 'Supun Lowe', role: 'Marketing management', img: '/Experts/supun.jpg' },

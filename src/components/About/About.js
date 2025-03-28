@@ -78,7 +78,7 @@ const AboutTitle = styled.h1`
   margin-bottom: 10px;
   
   @media (max-width: 992px) {
-    margin: 0 auto 15px;
+    margin: 0 auto 10px;
   }
 `;
 

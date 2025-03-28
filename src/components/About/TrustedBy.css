@@ -1,58 +1,72 @@
 .trusted-by-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 20px;
-    background-color: #f7f7f7;
-  }
-  
-  .trusted-by-title {
-    font-size: 2rem;
-    color: #000;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-  
-  .highlight {
-    color: #ff6347; /* Tomato color */
-  }
-  
-  .carousel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .logos {
-    display: flex;
-    gap: 30px;
-    overflow: hidden;
-    scroll-behavior: smooth;
-    width: 80vw;
-  }
-  
-  .customer-logo {
-    height: 80px;
-    width: auto;
-    transition: transform 0.3s ease;
-  }
-  
-  .customer-logo:hover {
-    transform: scale(1.1);
-  }
-  
-  .arrow {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    padding: 10px;
-    margin: 0 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  
-  .arrow:hover {
-    transform: scale(1.1);
-    background-color: #eee;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 40px;
+  background-color: #ffffffe5; /* White background like Kenutec */
+}
+
+.trusted-by-title {
+  font-size: 3rem;
+  color: #333; /* Darker gray for a professional look */
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.highlight {
+  color: #e65c00; /* Bright blue like Kenutec's accent */
+  font-weight: bold;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px; /* Constrain width like Kenutec */
+}
+
+.logos {
+  display: flex;
+  gap: 40px; /* Slightly larger gap for spacing */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  scroll-behavior: smooth;
+  width: 50%;
+  padding: 10px 0;
+  -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+.logos::-webkit-scrollbar {
+  display: 20s; /* Hide scrollbar in Chrome/Safari */
+}
+
+.customer-logo {
+  height: 80px; /* Smaller height like Kenutec */
+  width: auto;
+  filter: grayscale(100%); /* Grayscale effect like Kenutec */
+  transition: filter 0.3s ease, transform -5px ease;
+}
+
+.customer-logo:hover {
+  filter: grayscale(0%); /* Color on hover like Kenutec */
+  transform: scale(1.05); /* Slight scale-up on hover */
+}
+
+.arrow {
+  background-color: #fff;
+  border: 1px solid #e65c00;
+  border-radius: 50%;
+  padding: 8px;
+  margin: 0 15px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #070707;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.arrow:hover {
+  background-color: #e65c00;
+  transform: scale(1.1);
+}
