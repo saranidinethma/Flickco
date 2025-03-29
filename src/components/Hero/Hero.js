@@ -453,13 +453,7 @@ const Hero = () => {
             >
               Explore Our Services
             </CTAButton>
-            <SecondaryButton
-              to="/portfolio"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              View Our Work
-            </SecondaryButton>
+           
           </ButtonContainer>
         </motion.div>
       </HeroContent>

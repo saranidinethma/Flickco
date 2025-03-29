@@ -1,33 +1,30 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-import GlobalStyles from './styles/GlobalStyles';
-import theme from './styles/theme';
-import SubcategoryPage from './components/Portfolio/SubcategoryPage';
-// Core Components
-import Navbar from './components/Navigation/Navbar';
-import Hero from './components/Hero/Hero';
-import Services from './components/Services/Services';
-import About from './components/About/About';  // About for any other use
-import Contact from './components/Contact/Contact';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { ThemeProvider } from "styled-components"
+import GlobalStyles from "./styles/GlobalStyles"
+import theme from "./styles/theme"
 
+// Core Components
+import Navbar from "./components/Navigation/Navbar"
+import Hero from "./components/Hero/Hero"
+import Services from "./components/Services/Services"
+import About from "./components/About/About" // About for any other use
+import Contact from "./components/Contact/Contact"
 
 // Experts (Team) Page
-import Experts from './components/Experts/Experts';  // The Experts page, shown when About Us is clicked
+import Experts from "./components/Experts/Experts" // The Experts page, shown when About Us is clicked
 
 // Portfolio Components
-import Portfolio from './components/Portfolio/Portfolio';
-
-
+import Portfolio from "./components/Portfolio/Portfolio"
+import GalleryPage from "./components/Portfolio/GalleryPage" // Import the new GalleryPage component
 
 const HomePage = () => (
   <>
     <Hero />
     <Services />
-    <About />  {/* Display About.js after Services */}
+    <About /> {/* Display About.js after Services */}
     <Contact />
   </>
-);
+)
 
 function App() {
   return (
@@ -38,19 +35,15 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<Portfolio />} />  
-          <Route path="/portfolio/:categoryId" component={SubcategoryPage} />{/* Portfolio only shown here */}
-          {/* Experts page only when /about is clicked */}
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/:categoryId" element={<GalleryPage />} /> {/* New route for gallery pages */}
           <Route path="/about" element={<Experts />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
     </ThemeProvider>
-  );
-  
-
-
-
+  )
 }
 
-export default App;
+export default App
+

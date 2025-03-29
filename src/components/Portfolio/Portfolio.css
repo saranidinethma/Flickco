@@ -1,91 +1,17 @@
-/* Portfolio Section */
+/* You can keep your existing CSS file, but the styled-components in the JSX files above handle most of the styling */
 .portfolio-section {
-    padding: clamp(60px, 10vh, 100px) 0; /* Enhanced: Scalable padding */
-  }
-  
-  .portfolio-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  
-  .portfolio-filters {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-  
-  .filter-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    background: transparent;
-    color: #666;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .filter-button:hover,
-  .filter-button.active {
-    background: #007bff;
-    color: rgb(214, 210, 210);
-  }
-  
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-  }
-  
-  .portfolio-item {
-    position: relative;
-    border-radius: 15px;
-    overflow: hidden;
-    aspect-ratio: 1;
-  }
-  
-  .portfolio-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .portfolio-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .ProjectCard:hover .portfolio-overlay {
-    opacity: 1;
-  }
-  
-  .portfolio-item:hover .portfolio-image {
-    transform: scale(1.1);
-  }
-  
-  .portfolio-item:hover .portfolio-overlay {
-    opacity: 1;
-  }
-  
-  .portfolio-title {
-    color: white;
-    font-size: clamp(1.2rem, 3vw, 1.5rem); /* Enhanced: Scalable font */
-    margin-bottom: 10px;
-  }
-  
-  .portfolio-category {
-    color: #ddd;
-    font-size: 1rem;
-  }
-  
+  padding: clamp(60px, 10vh, 100px) 0;
+}
+
+.portfolio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Additional styles for gallery items if needed */
+.gallery-overlay h4 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
