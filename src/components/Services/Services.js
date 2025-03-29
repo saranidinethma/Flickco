@@ -92,7 +92,7 @@ const services = [
   {
     title: 'Cinematography',
     description: ' Crafting high-quality visual storytelling with professional filming techniques and advanced camera work.',
-    image: '/images/software-development.jpg'
+    image: '/images/1675720763645 (1).jpg'
   },
   {
     title: 'UI/UX Design',
