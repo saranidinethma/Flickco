@@ -11,11 +11,14 @@ import Services from './components/Services/Services';
 import About from './components/About/About';  // About for any other use
 import Contact from './components/Contact/Contact';
 
+
 // Experts (Team) Page
 import Experts from './components/Experts/Experts';  // The Experts page, shown when About Us is clicked
 
 // Portfolio Components
 import Portfolio from './components/Portfolio/Portfolio';
+
+
 
 const HomePage = () => (
   <>
@@ -44,6 +47,10 @@ function App() {
       </Router>
     </ThemeProvider>
   );
+  
+
+
+
 }
 
 export default App;
