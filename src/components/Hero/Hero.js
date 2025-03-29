@@ -1,4 +1,3 @@
-// Updated Hero.jsx
 "use client"
 import { useEffect } from "react"
 import styled from "styled-components"
@@ -42,6 +41,7 @@ const Overlay = styled.div`
 
 const HeroSection = styled.section`
   height: 100vh;
+  min-height: 550px; /* Ensure minimum height on small screens */
   display: flex;
   align-items: center;
   padding: 0 50px;
@@ -52,6 +52,10 @@ const HeroSection = styled.section`
     padding: 0 20px;
     text-align: center;
   }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 0 15px;
+  }
 `
 
 const HeroContent = styled.div`
@@ -61,6 +65,11 @@ const HeroContent = styled.div`
   color: ${(props) => props.theme.colors.white};
   z-index: 1;
   position: relative;
+  padding: 20px 0;
+  
+  @media (max-height: 600px) {
+    margin-top: 60px; /* Add space at top for very short screens */
+  }
 `
 
 const WelcomeText = styled(motion.p)`
@@ -71,6 +80,18 @@ const WelcomeText = styled(motion.p)`
   letter-spacing: 3px;
   font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+  }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
 `
 
 const Title = styled(motion.h1)`
@@ -88,10 +109,16 @@ const Title = styled(motion.h1)`
 
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     font-size: 48px;
+    margin-bottom: 20px;
   }
   
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     font-size: 36px;
+    margin-bottom: 15px;
+  }
+  
+  @media (max-width: 320px) {
+    font-size: 28px;
   }
 `
 
@@ -108,6 +135,16 @@ const Subtitle = styled(motion.p)`
     font-size: 18px;
     margin: 0 auto 40px;
   }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 16px;
+    margin: 0 auto 30px;
+    line-height: 1.4;
+  }
+  
+  @media (max-height: 600px) {
+    margin-bottom: 20px;
+  }
 `
 
 const ButtonContainer = styled(motion.div)`
@@ -117,6 +154,15 @@ const ButtonContainer = styled(motion.div)`
   @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
   }
 `
 
@@ -139,6 +185,18 @@ const CTAButton = styled(motion(Link))`
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(255, 126, 0, 0.5);
   }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    padding: 15px 30px;
+    font-size: 16px;
+  }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 14px 20px;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+  }
 `
 
 const SecondaryButton = styled(motion(Link))`
@@ -157,6 +215,18 @@ const SecondaryButton = styled(motion(Link))`
   &:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-3px);
+  }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    padding: 13px 28px;
+    font-size: 16px;
+  }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
   }
 `
 
@@ -184,6 +254,24 @@ const ScrollIndicator = styled(motion.div)`
     margin-top: 8px;
     opacity: 0.7;
   }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    bottom: 15px;
+    
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    span {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  }
+  
+  @media (max-height: 600px) {
+    display: none; /* Hide on very short screens */
+  }
 `
 
 const ShapeDecoration = styled.div`
@@ -195,6 +283,19 @@ const ShapeDecoration = styled.div`
   background: radial-gradient(circle, rgba(255,126,0,0.2) 0%, rgba(255,126,0,0) 70%);
   border-radius: 50%;
   z-index: 0;
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    width: 300px;
+    height: 300px;
+    bottom: -30px;
+    right: -50px;
+  }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    width: 200px;
+    height: 200px;
+    opacity: 0.7;
+  }
 `
 
 const Hero = () => {
@@ -235,6 +336,16 @@ const Hero = () => {
       opacity: 1,
       transition: { duration: 0.8, ease: "easeOut" }
     }
+  };
+
+  // Add a media query to detect viewport orientation/size for optimized animations
+  const isMobile = () => {
+    return window.innerWidth <= 768;
+  };
+
+  // Optimize animations for mobile
+  const getAnimationDelay = () => {
+    return isMobile() ? 1 : 1.5;
   };
 
   return (
@@ -292,7 +403,7 @@ const Hero = () => {
         animate={{ 
           opacity: 1, 
           y: 0,
-          transition: { delay: 1.5, duration: 0.8 } 
+          transition: { delay: getAnimationDelay(), duration: 0.8 } 
         }}
         whileHover={{ y: [0, -5, 0], transition: { duration: 1, repeat: Infinity } }}
       >
