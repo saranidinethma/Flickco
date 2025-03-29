@@ -34,6 +34,8 @@ const TrustedBy = () => {
     { name: "nimrasa", logo: "/logo/NIMRASA C PNG.png" },
     { name: "nuvusa", logo: "/logo/NUVUSA png black.png" },
     { name: "rama", logo: "/logo/RAMA.png" },
+    { name: "rama", logo: "/logo/PHOTO-2025-03-28-22-42-53.jpg" },
+
   ]
 
   const handleScroll = () => {
