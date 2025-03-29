@@ -1,118 +1,306 @@
-import React from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+// Updated Hero.jsx
+"use client"
+import { useEffect } from "react"
+import styled from "styled-components"
+import { motion, useAnimation } from "framer-motion"
+import { Link } from "react-router-dom"
+import { useInView } from "react-intersection-observer"
+
+// Video background container
+const VideoBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+`
+
+const BackgroundVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8);
+`
+
+// Overlay to ensure text readability
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg, 
+    rgba(0, 0, 0, 0.7) 0%, 
+    rgba(155, 85, 0, 0.5) 40%, 
+    rgba(255, 126, 0, 0.4) 90%
+  );
+  z-index: 0;
+`
 
 const HeroSection = styled.section`
   height: 100vh;
   display: flex;
   align-items: center;
   padding: 0 50px;
-  background: linear-gradient(to right, #000000, #9b5500);
   position: relative;
   overflow: hidden;
 
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     padding: 0 20px;
     text-align: center;
   }
-`;
+`
 
 const HeroContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  color: ${props => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.white};
   z-index: 1;
-`;
+  position: relative;
+`
 
 const WelcomeText = styled(motion.p)`
-  font-size: 18px;
-  color: #e65c00;
-  margin-bottom: 20px;
+  font-size: 22px;
+  color: #ff7e00;
+  margin-bottom: 25px;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 600;
-`;
+  letter-spacing: 3px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+`
 
 const Title = styled(motion.h1)`
-  font-size: 64px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.2;
-  color: ${props => props.theme.colors.white};
-
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
-    font-size: 40px;
+  font-size: 76px;
+  font-weight: 800;
+  margin-bottom: 25px;
+  line-height: 1.1;
+  color: ${(props) => props.theme.colors.white};
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+  
+  span {
+    color: #ff7e00;
+    display: inline-block;
   }
-`;
+
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    font-size: 48px;
+  }
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
+    font-size: 36px;
+  }
+`
 
 const Subtitle = styled(motion.p)`
-  font-size: 20px;
-  margin-bottom: 40px;
-  max-width: 600px;
-  opacity: 0.9;
-  color: ${props => props.theme.colors.lightGray};
+  font-size: 22px;
+  margin-bottom: 50px;
+  max-width: 650px;
+  line-height: 1.6;
+  opacity: 0.95;
+  color: ${(props) => props.theme.colors.lightGray};
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
-  @media (max-width: ${props => props.theme.breakpoints.tablet}) {
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
     font-size: 18px;
     margin: 0 auto 40px;
   }
-`;
+`
+
+const ButtonContainer = styled(motion.div)`
+  display: flex;
+  gap: 20px;
+  
+  @media (max-width: ${(props) => props.theme.breakpoints.tablet}) {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+`
 
 const CTAButton = styled(motion(Link))`
-  background: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary};
   color: white;
-  padding: 15px 30px;
+  padding: 18px 35px;
   border: none;
-  border-radius: 5px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
-  width: fit-content;
   text-decoration: none;
   display: inline-block;
+  box-shadow: 0 4px 15px rgba(255, 128, 0, 0.47);
+  transition: all 0.3s ease;
   
   &:hover {
-    background: ${props => props.theme.colors.primaryLight};
+    background: ${(props) => props.theme.colors.primaryLight};
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 126, 0, 0.5);
   }
-`;
+`
+
+const SecondaryButton = styled(motion(Link))`
+  background: transparent;
+  color: white;
+  padding: 16px 33px;
+  border: 2px solid white;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+  }
+`
+
+const ScrollIndicator = styled(motion.div)`
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  
+  svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+    opacity: 0.7;
+  }
+  
+  span {
+    color: white;
+    font-size: 14px;
+    margin-top: 8px;
+    opacity: 0.7;
+  }
+`
+
+const ShapeDecoration = styled.div`
+  position: absolute;
+  bottom: -50px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,126,0,0.2) 0%, rgba(255,126,0,0) 70%);
+  border-radius: 50%;
+  z-index: 0;
+`
 
 const Hero = () => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const scrollToNextSection = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth"
+    });
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
   return (
-    <HeroSection>
+    <HeroSection ref={ref}>
+      {/* Video Background */}
+      <VideoBackground>
+        <BackgroundVideo autoPlay loop muted playsInline>
+          <source src="/hero/0329(2).mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </BackgroundVideo>
+        <Overlay />
+      </VideoBackground>
+
+      <ShapeDecoration />
+
+      {/* Hero Content */}
       <HeroContent>
-        <WelcomeText
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={controls}
         >
-          WELCOME TO FLICKCO
-        </WelcomeText>
-        <Title
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Fueling Digital Growth
-        </Title>
-        <Subtitle
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          Transforming ideas in to reality
-        </Subtitle>
-        <CTAButton
-          to="/services"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Get Started 
-        </CTAButton>
+          <WelcomeText variants={itemVariants}>
+            WELCOME TO FLICKCO
+          </WelcomeText>
+          <Title variants={itemVariants}>
+            Fueling <span>Digital Growth</span> 
+          </Title>
+          <Subtitle variants={itemVariants}>
+            We transform bold ideas into powerful digital experiences, designed to elevate your brand and accelerate your business in the digital landscape.
+          </Subtitle>
+          <ButtonContainer variants={itemVariants}>
+            <CTAButton
+              to="/services"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Explore Our Services
+            </CTAButton>
+            <SecondaryButton
+              to="/portfolio"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              View Our Work
+            </SecondaryButton>
+          </ButtonContainer>
+        </motion.div>
       </HeroContent>
+
+      {/* Scroll Indicator */}
+      <ScrollIndicator 
+        onClick={scrollToNextSection}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ 
+          opacity: 1, 
+          y: 0,
+          transition: { delay: 1.5, duration: 0.8 } 
+        }}
+        whileHover={{ y: [0, -5, 0], transition: { duration: 1, repeat: Infinity } }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+        <span>Scroll Down</span>
+      </ScrollIndicator>
     </HeroSection>
   );
 };

@@ -1,32 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';  // Import useLocation to track the current route
+// Updated Navbar.jsx
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import './Navbar.css';
+import './Navbar.css'; // We'll keep using your CSS file but modify it
 import logoImage from '../../assets/flickco-logo.jpg';
 
 const Navbar = ({ onAboutClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
 
-  const location = useLocation();  // Hook to track the current location
+  const location = useLocation();
 
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 50);
-  };
+  // Handle scroll direction and position for smart navbar
+  const handleScroll = useCallback(() => {
+    const currentScrollPos = window.scrollY;
+    
+    // Show/hide navbar based on scroll direction
+    setVisible(
+      (prevScrollPos > currentScrollPos) || // Scrolling up
+      currentScrollPos < 100 // At top of page
+    );
+    
+    setPrevScrollPos(currentScrollPos);
+    
+    // Change navbar style after threshold
+    setScrolled(currentScrollPos > 50);
+  }, [prevScrollPos]);
 
-  // Close mobile menu when clicking outside
+  // Add scroll event listener
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (mobileMenuOpen && !e.target.closest('.mobile-menu') && !e.target.closest('.mobile-menu-button')) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [mobileMenuOpen]);
+
+  // Add custom class for visibility
+  const navbarClasses = `nav ${scrolled ? 'scrolled' : ''} ${!visible ? 'nav-hidden' : ''}`;
 
   return (
-    <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={navbarClasses}>
       <div className="logo-container">
         <Link to="/" className="logo">
           {logoError ? (
-            <div className="fallback-logo">FlickCo</div>
+            <div className="fallback-logo">
+              <span>Flick</span>Co
+            </div>
           ) : (
             <img
               src={logoImage}
@@ -38,16 +75,15 @@ const Navbar = ({ onAboutClick }) => {
       </div>
 
       <div className="nav-links">
-        <Link to="/" className="nav-link">Home</Link>
-        <Link to="/portfolio" className="nav-link">Portfolio</Link>
-        <Link to="/services" className="nav-link">Services</Link>
-
-        {/* Always show About Us link */}
-        <Link to="/about" className="nav-link" onClick={onAboutClick}>
+        <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
+        <Link to="/portfolio" className={`nav-link ${location.pathname === '/portfolio' ? 'active' : ''}`}>Portfolio</Link>
+        <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
+        <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} onClick={onAboutClick}>
           About Us
         </Link>
-
-        <Link to="/contact" className="nav-link">Contact</Link>
+        <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
+        
+        
       </div>
 
       <button
@@ -59,19 +95,40 @@ const Navbar = ({ onAboutClick }) => {
       </button>
 
       <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
-        <Link to="/" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-        <Link to="/portfolio" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Portfolio</Link>
-        <Link to="/services" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Services</Link>
-
-        {/* Mobile menu "About Us" link */}
-        <Link to="/about" className="nav-link" onClick={() => setMobileMenuOpen(false)}>
-          About Us
-        </Link>
-
-        <Link to="/contact" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+        <div className="mobile-menu-header">
+          <div className="mobile-logo">
+            {logoError ? (
+              <div className="fallback-logo">FlickCo</div>
+            ) : (
+              <img src={logoImage} alt="Flickco Logo" className="mobile-logo-img" />
+            )}
+          </div>
+          <button 
+            onClick={() => setMobileMenuOpen(false)}
+            className="mobile-close-button"
+            aria-label="Close menu"
+          >
+            <FaTimes />
+          </button>
+        </div>
+        
+        <div className="mobile-links-container">
+          <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
+          <Link to="/portfolio" className={`nav-link ${location.pathname === '/portfolio' ? 'active' : ''}`}>Portfolio</Link>
+          <Link to="/services" className={`nav-link ${location.pathname === '/services' ? 'active' : ''}`}>Services</Link>
+          <Link to="/about" className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`}>
+            About Us
+          </Link>
+          <Link to="/contact" className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
+          
+          
+        </div>
+        
+        <div className="mobile-footer">
+          <p>© 2025 FlickCo. All rights reserved.</p>
+        </div>
       </div>
 
-      {/* Overlay for mobile menu */}
       {mobileMenuOpen && <div className="mobile-menu-overlay" onClick={() => setMobileMenuOpen(false)}></div>}
     </nav>
   );

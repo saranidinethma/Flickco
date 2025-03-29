@@ -8,7 +8,7 @@ import emailjs from "@emailjs/browser"
 
 const ContactSection = styled.section`
   padding: 80px 0;
-  background: #f9f9f9;
+  background:rgb(232, 232, 233);
   display: flex;
   flex-direction: column;
   align-items: center;
