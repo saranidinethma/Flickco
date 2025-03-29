@@ -52,6 +52,7 @@ const HeroSection = styled.section`
     padding: 0 20px;
     text-align: center;
   }
+    
   
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
     padding: 0 15px;
