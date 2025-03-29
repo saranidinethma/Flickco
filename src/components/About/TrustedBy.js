@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './TrustedBy.css';
 
 const TrustedBy = () => {
@@ -29,38 +29,108 @@ const TrustedBy = () => {
     { id: 25, logo: '/logo/Truenorth PNG.png', alt: 'truenorth' },
     { id: 26, logo: '/logo/we neibhour LB png.png', alt: 'we neibhour' },
     { id: 27, logo: '/logo/WISE PNG.png', alt: 'wise x' },
-   
-
-   
-
-
-    
-
   ];
 
-  // Basic scroll functionality for the carousel
+  const containerRef = useRef(null);
+  const logosRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [autoScroll, setAutoScroll] = useState(true);
+
+  // Check if section is visible for animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  // Auto scroll functionality
+  useEffect(() => {
+    if (!isVisible || !autoScroll) return;
+    
+    let scrollInterval;
+    
+    const startAutoScroll = () => {
+      scrollInterval = setInterval(() => {
+        if (logosRef.current) {
+          const scrollWidth = logosRef.current.scrollWidth;
+          const clientWidth = logosRef.current.clientWidth;
+          const currentScroll = logosRef.current.scrollLeft;
+          
+          if (currentScroll + clientWidth >= scrollWidth) {
+            // Reset to beginning when reached end
+            logosRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            logosRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+          }
+        }
+      }, 3000);
+    };
+    
+    startAutoScroll();
+    
+    return () => {
+      clearInterval(scrollInterval);
+    };
+  }, [isVisible, autoScroll]);
+
+  // Scroll functionality for the carousel
   const scrollLeft = () => {
-    document.querySelector('.logos').scrollBy({ left: -300, behavior: 'smooth' });
+    if (logosRef.current) {
+      logosRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+      setAutoScroll(false);
+    }
   };
 
   const scrollRight = () => {
-    document.querySelector('.logos').scrollBy({ left: 300, behavior: 'smooth' });
+    if (logosRef.current) {
+      logosRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+      setAutoScroll(false);
+    }
   };
 
+  // Pause auto-scroll on hover
+  const handleMouseEnter = () => setAutoScroll(false);
+  const handleMouseLeave = () => setAutoScroll(true);
+
   return (
-    <div className="trusted-by-container">
+    <div 
+      className={`trusted-by-container ${isVisible ? 'fade-in' : ''}`} 
+      ref={containerRef}
+    >
       <h2 className="trusted-by-title">
         Trusted by over <span className="highlight">50+</span> customers
       </h2>
-      <div className="carousel">
+      <div 
+        className="carousel" 
+        onMouseEnter={handleMouseEnter} 
+        onMouseLeave={handleMouseLeave}
+      >
         <button className="arrow left" onClick={scrollLeft}>←</button>
-        <div className="logos">
+        <div className="logos" ref={logosRef}>
           {customers.map((customer) => (
             <img
               key={customer.id}
               src={customer.logo}
               alt={customer.alt}
-              className="customer-logo"
+              className={`customer-logo ${isVisible ? 'visible' : ''}`}
+              loading="lazy"
             />
           ))}
         </div>

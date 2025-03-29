@@ -1,6 +1,6 @@
 .aboutContainer {
   padding: 80px 0;
-  background-color: #f8f9fa;
+  background-color: #e3e3e3;
 }
 
 .aboutHeader {
@@ -87,3 +87,4 @@
 .socialIcon:hover {
   color: #e65c00;
 }
+

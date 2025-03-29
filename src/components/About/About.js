@@ -4,7 +4,7 @@ import StructuredWorkflow from './StructuredWorkflow';
 
 const Section = styled.section`
   padding: 100px 0;
-  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  background: linear-gradient(to bottom,rgb(232, 232, 233),rgb(241, 241, 241));
   overflow: hidden;
 `;
 
