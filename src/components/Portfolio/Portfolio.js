@@ -134,7 +134,6 @@ export const categories = [
       { id: 7, image: "/images/portfolio/posts/LGS post.jpg" },
       { id: 8, image: "/images/portfolio/posts/D-Major.jpg" },
       { id: 9, image: "/images/portfolio/posts/IMG_4740.JPG" },
-      { id: 10, image: "/images/portfolio/posts/WhatsApp Image 2025-02-25 at 04.41.05_8f002f8d.jpg" },
 
 
 
