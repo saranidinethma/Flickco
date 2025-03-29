@@ -63,19 +63,21 @@ const GalleryItem = styled.div`
   aspect-ratio: 1;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   
-  video {
+  img, video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
   
-  &:hover video {
-    transform: scale(1.1);
-  }
-  
-  &:hover .gallery-overlay {
-    opacity: 1;
+  &:hover {
+    img, video {
+      transform: scale(1.1);
+    }
+    
+    .gallery-overlay {
+      opacity: 1;
+    }
   }
 `
 
@@ -158,14 +160,21 @@ const GalleryPage = () => {
         <GalleryGrid>
           {category.items.map((item) => (
             <GalleryItem key={item.id}>
-              <video
-                src={item.video}
-                poster={item.poster}
-                muted
-                loop
-                autoPlay
-                playsInline
-              />
+              {item.video ? (
+                <video
+                  src={item.video}
+                  poster={item.poster}
+                  muted
+                  loop
+                  autoPlay
+                  playsInline
+                />
+              ) : (
+                <img 
+                  src={item.image || "/placeholder.svg"} 
+                  alt={item.title} 
+                />
+              )}
               <GalleryOverlay className="gallery-overlay">
                 <h4>{item.title}</h4>
               </GalleryOverlay>
