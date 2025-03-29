@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useState, useRef } from "react"
 import styled from "styled-components"
 import { motion, useAnimation } from "framer-motion"
 import { Link } from "react-router-dom"
@@ -21,6 +21,33 @@ const BackgroundVideo = styled.video`
   height: 100%;
   object-fit: cover;
   filter: brightness(0.8);
+`
+
+// Loading placeholder until video is ready
+const LoadingPlaceholder = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #141414;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: ${props => props.fadeOut ? 0 : 1};
+  transition: opacity 0.5s ease-out;
+  
+  svg {
+    width: 40px;
+    height: 40px;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `
 
 // Overlay to ensure text readability
@@ -231,50 +258,6 @@ const SecondaryButton = styled(motion(Link))`
   }
 `
 
-const ScrollIndicator = styled(motion.div)`
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  z-index: 1;
-  
-  svg {
-    width: 30px;
-    height: 30px;
-    color: white;
-    opacity: 0.7;
-  }
-  
-  span {
-    color: white;
-    font-size: 14px;
-    margin-top: 8px;
-    opacity: 0.7;
-  }
-  
-  @media (max-width: ${(props) => props.theme.breakpoints.mobile}) {
-    bottom: 15px;
-    
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-    
-    span {
-      font-size: 12px;
-      margin-top: 5px;
-    }
-  }
-  
-  @media (max-height: 600px) {
-    display: none; /* Hide on very short screens */
-  }
-`
-
 const ShapeDecoration = styled.div`
   position: absolute;
   bottom: -50px;
@@ -300,24 +283,103 @@ const ShapeDecoration = styled.div`
 `
 
 const Hero = () => {
+  const videoRef = useRef(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   });
 
+  // Handle video loading and autoplay
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    
+    if (videoElement) {
+      // Preload the video
+      videoElement.preload = "auto";
+      
+      // Listen for loading events
+      const handleCanPlay = () => {
+        setIsVideoLoaded(true);
+        
+        // Attempt to play the video once it's loaded
+        if (!isVideoPlaying) {
+          playVideo();
+        }
+      };
+      
+      // Handle successful play event
+      const handlePlay = () => {
+        setIsVideoPlaying(true);
+      };
+      
+      // Handle play errors (often occurs on mobile)
+      const handlePlayError = (error) => {
+        console.log("Video play error:", error);
+        
+        // Add visibility change listener to handle when app comes back to foreground
+        document.addEventListener("visibilitychange", handleVisibilityChange);
+        
+        // Add scroll listener as fallback for mobile
+        window.addEventListener("scroll", playVideoOnScroll);
+      };
+      
+      videoElement.addEventListener("canplaythrough", handleCanPlay);
+      videoElement.addEventListener("play", handlePlay);
+      videoElement.addEventListener("error", handlePlayError);
+      
+      // Play video function
+      const playVideo = () => {
+        const playPromise = videoElement.play();
+        
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsVideoPlaying(true);
+            })
+            .catch(error => {
+              handlePlayError(error);
+            });
+        }
+      };
+      
+      // Handle page visibility changes (for when user returns to the page)
+      const handleVisibilityChange = () => {
+        if (document.visibilityState === "visible" && !isVideoPlaying) {
+          playVideo();
+        }
+      };
+      
+      // Fallback for mobile devices: play on scroll
+      const playVideoOnScroll = () => {
+        if (!isVideoPlaying) {
+          playVideo();
+          // Remove listener once played
+          window.removeEventListener("scroll", playVideoOnScroll);
+        }
+      };
+      
+      // Attempt to play the video immediately (will likely be blocked on mobile)
+      playVideo();
+      
+      // Cleanup listeners
+      return () => {
+        videoElement.removeEventListener("canplaythrough", handleCanPlay);
+        videoElement.removeEventListener("play", handlePlay);
+        videoElement.removeEventListener("error", handlePlayError);
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+        window.removeEventListener("scroll", playVideoOnScroll);
+      };
+    }
+  }, [isVideoPlaying]);
+
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
-
-  const scrollToNextSection = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth"
-    });
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -339,21 +401,26 @@ const Hero = () => {
     }
   };
 
-  // Add a media query to detect viewport orientation/size for optimized animations
-  const isMobile = () => {
-    return window.innerWidth <= 768;
-  };
-
-  // Optimize animations for mobile
-  const getAnimationDelay = () => {
-    return isMobile() ? 1 : 1.5;
-  };
-
   return (
     <HeroSection ref={ref}>
       {/* Video Background */}
       <VideoBackground>
-        <BackgroundVideo autoPlay loop muted playsInline>
+        {!isVideoLoaded && (
+          <LoadingPlaceholder fadeOut={isVideoLoaded}>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="10" stroke="#ff7e00" strokeWidth="2" strokeLinecap="round" strokeDasharray="30 30" />
+            </svg>
+          </LoadingPlaceholder>
+        )}
+        <BackgroundVideo
+          ref={videoRef}
+          autoPlay
+          playsInline
+          muted
+          loop
+          preload="auto"
+          onLoadedData={() => setIsVideoLoaded(true)}
+        >
           <source src="/hero/0329(2).mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </BackgroundVideo>
@@ -396,23 +463,6 @@ const Hero = () => {
           </ButtonContainer>
         </motion.div>
       </HeroContent>
-
-      {/* Scroll Indicator */}
-      <ScrollIndicator 
-        onClick={scrollToNextSection}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ 
-          opacity: 1, 
-          y: 0,
-          transition: { delay: getAnimationDelay(), duration: 0.8 } 
-        }}
-        whileHover={{ y: [0, -5, 0], transition: { duration: 1, repeat: Infinity } }}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-        <span>Scroll Down</span>
-      </ScrollIndicator>
     </HeroSection>
   );
 };
