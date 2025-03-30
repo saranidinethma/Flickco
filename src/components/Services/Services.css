@@ -48,3 +48,21 @@
     color: #666;
     line-height: 1.6;
   }
+  /* Add this to your existing Services.css file */
+
+@keyframes pulse-highlight {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 126, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 126, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 126, 0, 0);
+  }
+}
+
+.highlight-service {
+  animation: pulse-highlight 2s infinite;
+}
+
