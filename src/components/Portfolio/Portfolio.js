@@ -57,7 +57,7 @@ const Title = styled.h2`
     display: block;
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #3498db, #8e44ad);
+    background: linear-gradient(90deg,rgb(89, 90, 91),rgb(218, 98, 50));
     margin: 15px auto 0;
     border-radius: 2px;
   }
@@ -186,10 +186,10 @@ const NavigationButton = styled.button`
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s cubic-bezier(0.33, 1, 0.68, 1);
-  color: #3498db;
+  color:rgb(219, 102, 52);
   
   &:hover {
-    background: #3498db;
+    background:rgb(177, 93, 38);
     color: white;
     transform: translateY(-50%) scale(1.1);
   }
