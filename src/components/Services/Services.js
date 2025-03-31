@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react"
 import { useLocation } from "react-router-dom"
 import styled from "styled-components"
 import { motion } from "framer-motion"
+import "./Services.css"
 
 // Styled components remain the same
 const ServicesSection = styled.section`

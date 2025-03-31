@@ -275,7 +275,7 @@ const categories = [
   {
     id: "websites",
     title: "Website Design",
-    image: "/images/portfolio/website-cover.jpg",
+    image: "/images/portfolio/Web/1.png",
     description: "Modern website designs",
     items: [
       { id: 1, title: "E-commerce Site", image: "/images/portfolio/websites/ecommerce.jpg" },
@@ -287,7 +287,7 @@ const categories = [
   {
     id: "animations-2d",
     title: "2D Animations",
-    image: "/images/portfolio/animations/2d-cover.jpg",
+    image: "/images/portfolio/2D Animation/2.png",
     description: "Creative 2D animations",
     items: [
       { 
@@ -319,7 +319,7 @@ const categories = [
 {
   id: "animations-3d",
   title: "3D Animations",
-  image: "/images/portfolio/animations/2d-cover.jpg",
+  image: "/images/portfolio/3D Animation/3.png",
   description: "Creative 3D animations",
   items: [
     { 
@@ -368,36 +368,14 @@ const categories = [
   {
     id: "branding",
     title: "Branding",
-    image: "/images/portfolio/branding-cover.jpg",
+    image: "/images/portfolio/Branding/4.png",
     description: "Complete brand identity design",
     items: [
       { id: 1, title: "Logo Design", image: "/images/portfolio/branding/logo.jpg" },
       { id: 2, title: "Brand Guidelines", image: "/images/portfolio/branding/guidelines.jpg" },
       { id: 3, title: "Packaging Design", image: "/images/portfolio/branding/packaging.jpg" },
     ],
-  },
-  {
-    id: "ui-ux",
-    title: "UI/UX Design",
-    image: "/images/portfolio/ui-ux-cover.jpg",
-    description: "User interface and experience design",
-    items: [
-      { id: 1, title: "Mobile App UI", image: "/images/portfolio/ui-ux/mobile.jpg" },
-      { id: 2, title: "Web App UI", image: "/images/portfolio/ui-ux/webapp.jpg" },
-      { id: 3, title: "Dashboard Design", image: "/images/portfolio/ui-ux/dashboard.jpg" },
-    ],
-  },
-  {
-    id: "print",
-    title: "Print Design",
-    image: "/images/portfolio/print-cover.jpg",
-    description: "Professional print materials",
-    items: [
-      { id: 1, title: "Business Cards", image: "/images/portfolio/print/business-cards.jpg" },
-      { id: 2, title: "Brochures", image: "/images/portfolio/print/brochures.jpg" },
-      { id: 3, title: "Posters", image: "/images/portfolio/print/posters.jpg" },
-    ],
-  },
+  }
 ]
 
 const Portfolio = () => {
