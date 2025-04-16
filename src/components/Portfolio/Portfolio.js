@@ -267,9 +267,43 @@ const categories = [
     image: "/images/portfolio/reels/reels.png",
     description: "Engaging social media reels",
     items: [
-      { id: 1, title: "Product Reel", image: "/images/portfolio/social-media/reels/product.jpg" },
-      { id: 2, title: "Brand Story", image: "/images/portfolio/social-media/reels/brand.jpg" },
-      { id: 3, title: "Tutorial Reel", image: "/images/portfolio/social-media/reels/tutorial.jpg" },
+
+      { 
+        id: 1, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/reels/WhatsApp Video 2025-04-07 at 19.05.48.mp4",
+       
+      },
+      { 
+        id: 2, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/reels/WhatsApp Video 2025-04-07 at 19.06.30.mp4",
+       
+      },
+      { 
+        id: 3, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/reels/WhatsApp Video 2025-04-07 at 19.07.10.mp4",
+       
+      },
+      { 
+        id: 4, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/reels/WhatsApp Video 2025-04-07 at 19.07.11.mp4",
+       
+      },
+      { 
+        id: 5, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/reels/WhatsApp Video 2025-04-07 at 19.07.28.mp4",
+       
+      },
+      { 
+        id: 6, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/reels/WhatsApp Video 2025-04-07 at 19.08.12.mp4",
+       
+      },
     ],
   },
   {
@@ -359,10 +393,32 @@ const categories = [
     title: "Videography",
     image: "/images/portfolio/Videography/VIDEOGRAPHY.png",
     description: "Professional video production",
-    items: [
-      { id: 1, title: "Corporate Video", image: "/images/portfolio/videography/corporate.jpg" },
-      { id: 2, title: "Event Coverage", image: "/images/portfolio/videography/event.jpg" },
-      { id: 3, title: "Product Video", image: "/images/portfolio/videography/product.jpg" },
+
+      items: [
+        { 
+          id: 1, 
+          title: "hotel", 
+          video: "/images/portfolio/Videography/hotel.mp4",
+         
+        },
+        { 
+          id: 2, 
+          title: "Regal", 
+          video: "/images/portfolio/Videography/regal.mp4",
+          // poster: "/images/portfolio/animations/2d/character-poster.jpg" 
+        },
+        { 
+          id: 3, 
+          title: "starbeens", 
+          video: "/images/portfolio/Videography/starbeens.mp4",
+          // poster: "/images/portfolio/animations/2d/character-poster.jpg" 
+        },
+        { 
+          id: 4, 
+          title: "amagi", 
+          video: "/images/portfolio/Videography/amagi.mp4",
+          // poster: "/images/portfolio/animations/2d/character-poster.jpg" 
+        },
     ],
   },
   {
@@ -375,7 +431,29 @@ const categories = [
       { id: 2, title: "Brand Guidelines", image: "/images/portfolio/branding/guidelines.jpg" },
       { id: 3, title: "Packaging Design", image: "/images/portfolio/branding/packaging.jpg" },
     ],
-  }
+  },
+  {
+    id: "Music Video",
+    title: "Music Video",
+    image: "/images/portfolio/Branding/4.png",
+    description: "Complete brand identity design",
+    items: [
+      { 
+        id: 1, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/music video/WhatsApp Video 2025-04-07 at 19.05.27.mp4",
+       
+      },
+      { 
+        id: 2, 
+        // title: "Logo Animation", 
+        video: "/images/portfolio/music video/WhatsApp Video 2025-04-07 at 19.06.46.mp4",
+       
+      },
+    ],
+  },
+  
+
 ]
 
 const Portfolio = () => {
